@@ -12,7 +12,7 @@ pip install -r requirements.txt
 ~~~
 # on video file
 python main.py --input_path [VIDEO_FILE_NAME] --display
-
+~~~
 
 ## Reference
 1) [DeepSORT_YOLOv5_Pytorch](https://github.com/HowieMa/DeepSORT_YOLOv5_Pytorch)   
