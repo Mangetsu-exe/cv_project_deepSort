@@ -1,5 +1,5 @@
-output
-videos
+output/
+videos/
 
 legacy/*
 .DS_Store
