@@ -8,8 +8,8 @@ import sys
 import argparse
 import os
 from deep_sort import build_tracker
-from utils_ds.draw import draw_boxes
-from utils_ds.parser import get_config
+from utils.draw import draw_boxes, compute_color_for_labels
+from utils.parser import get_config
 from yolov5.utils.general import check_img_size, non_max_suppression, xyxy2xywh, scale_coords
 from yolov5.utils.datasets import letterbox
 from yolov5.utils.torch_utils import select_device, time_synchronized
@@ -54,6 +54,7 @@ class VideoTracker(object):
             self.detector.half()  # to FP16
 
         self.names = self.detector.module.names if hasattr(self.detector, 'module') else self.detector.names
+        self.img_tracks = [[]]
 
         print('Done..')
         if self.device == 'cpu':
@@ -126,7 +127,7 @@ class VideoTracker(object):
                 identities = outputs[:, -1]
                 print("identities = ")
                 print(identities)
-                img0 = draw_boxes(img0, bbox_xyxy, identities)  # BGR
+                img0, self.img_tracks = draw_boxes(img0, bbox_xyxy, identities, tracks=self.img_tracks)  # BGR
 
                 # add FPS information on output video
                 text_scale = max(1, img0.shape[1] // 1600)
@@ -141,8 +142,19 @@ class VideoTracker(object):
                     )
 
             # display in a window ******************************
+
+            # draw tracks
+            for track_id in range(len(self.img_tracks)):
+                cur_track = self.img_tracks[track_id] 
+                if len(cur_track) < 2:
+                        continue
+                for coord_id in range(len(cur_track)):
+                    if coord_id == 0:
+                        continue
+                    cv2.line(img0, cur_track[coord_id-1], cur_track[coord_id], compute_color_for_labels(track_id), thickness=1) 
+
             if self.args.display:
-                cv2.imshow("test", img0)
+                cv2.imshow("Visual Results", img0)
                 if cv2.waitKey(1) == ord('q'):  # q to quit
                     cv2.destroyAllWindows()
                     break
