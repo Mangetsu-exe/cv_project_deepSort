@@ -153,14 +153,14 @@ class VideoTracker(object):
             if True:
                 for i_ in range(1,len(self.img_tracks)):
                     for j_ in range(i_,len(self.img_tracks)):
-                        if i_==j_ or len(self.img_tracks[j_]) < 1:
+                        if i_==j_ or len(self.img_tracks[j_]) < 2:
                             continue
                         trk_i = self.img_tracks[i_]
                         trk_j = self.img_tracks[j_] 
                         #print(tracks)
                         if dist_(trk_i[-1], trk_j[0]) < 30:
                             self.img_tracks[i_].extend(self.img_tracks[j_])
-                            del self.img_tracks[j_]# = []
+                            self.img_tracks[j_] = []
                             #print(j_,"->",i_)
 
             for track_id in range(len(self.img_tracks)):
