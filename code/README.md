@@ -3,7 +3,9 @@
 ## Folder organization
 
 output/
+
 ├── code/
+
 ├   ├── configs/
 ├   ├── deep_sort/
 ├   ├── utils_ds/
