@@ -65,15 +65,15 @@ def draw_boxes(img, bbox, identities=None, offset=(0, 0), tracks=[[]]):
         # t_size = cv2.getTextSize(label, cv2.FONT_HERSHEY_PLAIN, 2 , 2)[0]
         cv2.rectangle(img, (x1, y1), (x2,y2), color, 2)
         # cv2.rectangle(img, (x1, y1), (x1 + abs(x1 - x2), y1 - abs(x1 - x2)), color, -1)
-        cv2.putText(
-            img=img,
-            text=label,
-            org=(x1, y1),
-            fontFace=cv2.FONT_HERSHEY_PLAIN,
-            fontScale=1.2,
-            color=[255,255,255],
-            thickness=2
-            )
+        # cv2.putText(
+        #     img=img,
+        #     text=label,
+        #     org=(x1, y1),
+        #     fontFace=cv2.FONT_HERSHEY_PLAIN,
+        #     fontScale=1.2,
+        #     color=[255,255,255],
+        #     thickness=2
+        #     )
     return img, tracks
 
 if __name__ == '__main__':

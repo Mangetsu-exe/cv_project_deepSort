@@ -50,7 +50,6 @@ def test(data,
         # Remove previous
         for f in glob.glob(str(Path(save_dir) / 'test_batch*.jpg')):
             os.remove(f)
-
         # Load model
         model = attempt_load(weights, map_location=device)  # load FP32 model
         imgsz = check_img_size(imgsz, s=model.stride.max())  # check img_size
