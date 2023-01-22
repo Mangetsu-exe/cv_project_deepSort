@@ -1,6 +1,7 @@
 # CV_Project_DeepSort
 
 ## Folder organization
+```
 
 ├── output/
 │   ├── code/
@@ -20,6 +21,7 @@
 ├── _site
 └── index.html
 
+```
 
 
 |     code/
