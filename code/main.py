@@ -146,6 +146,32 @@ class VideoTracker(object):
         
             # draw tracks ******************************
 
+            def dist_(pi, pj):
+                return math.sqrt((pi[0]-pj[1])**2+(pi[0]-pj[1])**2)
+        
+            #print(self.img_tracks)
+            if True:
+                for i_ in range(1,len(self.img_tracks)):
+                    for j_ in range(i_,len(self.img_tracks)):
+                        if i_==j_ or len(self.img_tracks[j_]) < 1:
+                            continue
+                        trk_i = self.img_tracks[i_]
+                        trk_j = self.img_tracks[j_] 
+                        #print(tracks)
+                        if dist_(trk_i[-1], trk_j[0]) < 30:
+                            self.self.img_tracks[i_].extend(self.img_tracks[j_])
+                            del self.img_tracks[j_]# = []
+                            #print(j_,"->",i_)
+
+            for track_id in range(len(self.img_tracks)):
+                    cur_track = self.img_tracks[track_id] 
+                    if len(cur_track) < 2:
+                            continue
+                    for coord_id in range(len(cur_track)):
+                        if coord_id == 0:
+                            continue
+                        cv2.line(img0, cur_track[coord_id-1], cur_track[coord_id], (255,155,55), thickness=2) 
+                        
             if self.args.display:
                 cv2.imshow("Visual Results" , img0)
                 if cv2.waitKey(1) == ord('q'):  # q to quit

@@ -27,7 +27,8 @@ def draw_boxes(img, bbox, identities=None, offset=(0, 0), tracks=[[]]):
 
         def dist_(pi, pj):
             return math.sqrt((pi[0]-pj[1])**2+(pi[0]-pj[1])**2)
-
+        
+        ''' 
         #print(self.img_tracks)
         if True:
             for i_ in range(1,len(tracks)):
@@ -50,7 +51,8 @@ def draw_boxes(img, bbox, identities=None, offset=(0, 0), tracks=[[]]):
                     if coord_id == 0:
                         continue
                     cv2.line(img, cur_track[coord_id-1], cur_track[coord_id], (255,155,55), thickness=2) 
-                
+        '''
+
         # box text and bar
         id = int(identities[i]) if identities is not None else 0    
         color = (255,155,55)#compute_color_for_labels(id)
